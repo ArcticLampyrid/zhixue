@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <script>
+        window.$ = window.jQuery = require("../../bower_components/jquery/dist/jquery.slim.min.js");
+    </script>
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        require("../../dist/client/profile.js");
+    </script>
+</head>
+
+<body>
+    <div class="list-group" id="list-paper">
+        <div class="list-group-item">
+            <span>姓名：<span id="user-name">Loading...</span></span>
+        </div>
+        <div class="list-group-item">
+            <span>学校：<span id="school-name">Loading...</span></span>
+        </div>
+        <div class="list-group-item">
+            <span>班级：<span id="class-name">Loading...</span></span>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,24 @@
+{
+    "name": "zhixue",
+    "main": "./dist/server/main.js",
+    "authors": [
+        "qiqiworld <1354092549@qq.com>"
+    ],
+    "license": "MIT",
+    "keywords": [
+        "zhixue"
+    ],
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "bootstrap": "^4.3.1",
+        "chart.js": "^2.8.0",
+        "jquery": "^3.4.1"
+    }
+}

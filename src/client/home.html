@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <script>
+        window.$ = window.jQuery = require("../../bower_components/jquery/dist/jquery.slim.min.js");
+    </script>
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        require("../../dist/client/home.js");
+    </script>
+</head>
+
+<body>
+    <div class="content_fluid" style="padding: 20px 12px 20px 12px;">
+        <h1 class="display-4">智学网PC客户端</h1>
+        <p class="lead">这是一个由第三方提供的轻巧的智学网PC客户端（具有Windows/Linux/Mac版）<br />方便电脑端查分</p>
+        <hr />
+        <p>开始使用吧</p>
+        <a class="btn btn-secondary btn-lg" href="login.html" target="_top"
+            onclick="window.localStorage.clear(); window.sessionStorage.clear();">注销登录</a>
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <h4 class="card-title d-inline">一言</h4>
+                    <a class="card-link float-right" id="updateHitokoto" href="#">刷新</a>
+                </div>
+                <p class="card-text pt-3" id="hitokoto">Loading...</p>
+                <span class="text-black-50 d-flex flex-row-reverse">Powered by Hitokoto.cn</span>
+            </div>
+        </div>
+    </div>
+
+</html>

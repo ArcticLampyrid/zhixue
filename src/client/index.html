@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>智学网PC客户端</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <script>
+        window.$ = window.jQuery = require("../../bower_components/jquery/dist/jquery.slim.min.js");
+    </script>
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        require("../../dist/client/index.js");
+    </script>
+</head>
+
+<body class="h-100">
+    <div class="container-fluid d-flex h-100 flex-column">
+        <div class="row h-100">
+            <div class="col-3 h-100" style="background-color: lightgrey;margin: 0%">
+                <div class="nav nav-pills flex-column nazx text-center" id="zx-tab" role="tablist"
+                    aria-orientation="vertical">
+                    <div class="text-center">
+                        <img class="rounded-circle img-fluid"
+                            src="https://www.zhixue.com/container/public/module/global/images_tea_new/p1.png">
+                        <p><span id="sidebar-name">Loading...</span></p>
+                        <p><span id="sidebar-school">Loading...</span></p>
+                        <p><span id="sidebar-class">Loading...</span></p>
+                    </div>
+                    <hr />
+                    <a class="nav-link active show" id="zx-home-tab" href="home.html" target="content">主页</a>
+                    <a class="nav-link" id="zx-profile-tab" href="profile.html" target="content">个人资料</a>
+                    <a class="nav-link" id="zx-homework-tab" href="examination.html?reportType=homework" target="content">作业报告</a>
+                    <a class="nav-link" id="zx-examination-tab" href="examination.html?reportType=exam" target="content">考试报告</a>
+                </div>
+            </div>
+            <iframe class="col-9 h-100" style="overflow:scroll; margin: 0%; padding: 0%; border: none;" name="content" id="content"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>

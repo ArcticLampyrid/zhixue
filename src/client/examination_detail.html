@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Examination</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <script>
+        window.$ = window.jQuery = require("../../bower_components/jquery/dist/jquery.slim.min.js");
+    </script>
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../bower_components/chart.js/dist/Chart.min.css" type="text/css">
+    <script type="text/javascript" src="../../bower_components/chart.js/dist/Chart.min.js"></script>
+    <script>
+        require("../../dist/client/examination_detail.js");
+    </script>
+</head>
+
+<body>
+    <template id="template-paper">
+        <div class="list-group-item subject-details">
+            <h3><span class="subject-name"></span></h3>
+            <div class="progress">
+                <div class="progress-bar paper-score-progress"><span class="paper-percentage"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>我的分数：<span class="paper-userScore"></span></p>
+                </div>
+                <div class="col-6">
+                    <p>试卷总分：<span class="paper-standardScore"></span></p>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse">
+                <a class="btn btn-link paper-viewStudentAnswer" href="#">查看原卷</a>
+            </div>
+        </div>
+    </template>
+
+    <div class="list-group" id="list-paper">
+        <div class="list-group-item d-none" id="conclusion">
+            <h3><span class="subject-name">全科</span></h3>
+            <div class="progress">
+                <div class="progress-bar" id="exam-score-progress"><span id="exam-percentage"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>我的分数：<span id="exam-userScore"></span></p>
+                </div>
+                <div class="col-6">
+                    <p>试卷总分：<span id="exam-standardScore"></span></p>
+                </div>
+            </div>
+            <canvas id="radarChart" style="max-width: 500px;" class="mx-auto"></canvas>
+        </div>
+    </div>
+
+</html>
