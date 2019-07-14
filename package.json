@@ -5,7 +5,34 @@
     "scripts": {
         "build": "tsc",
         "start": "npm run build && electron ./dist/server/main.js",
-        "package": "npm run build && electron-packager ./ zhixue --out ./OutApp --overwrite"
+        "dist": "npm run build && electron-builder --win --ia32 --publish never",
+        "publish": "npm run build && electron-builder --win --ia32 --publish always"
+    },
+    "author": {
+        "name": "qiqiworld",
+        "email": "1354092549@qq.com",
+        "url": "https://qiqiworld.tk/"
+    },
+    "build": {
+        "files": [
+            "!src/**/*.ts"
+        ],
+        "appId": "tk.qiqiworld.zhixue",
+        "productName": "智学网",
+        "directories": {
+            "output": "OutApp"
+        },
+        "nsis": {
+            "language": 2052
+        },
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "publish": [
+                "github"
+            ]
+        }
     },
     "repository": "https://github.com/1354092549/zhixue",
     "license": "MIT",
@@ -14,6 +41,7 @@
     ],
     "dependencies": {
         "custom-electron-titlebar": "^3.0.8",
+        "electron-updater": "^4.1.2",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.7",
         "sugar": "^2.0.6",
@@ -26,7 +54,7 @@
         "@types/request-promise-native": "^1.0.16",
         "@types/uuid": "^3.4.4",
         "electron": "^5.0.3",
-        "electron-packager": "^13.1.1",
+        "electron-builder": "^21.0.15",
         "typescript": "^3.5.2"
     }
 }

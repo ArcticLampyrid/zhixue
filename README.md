@@ -9,9 +9,8 @@ git clone https://github.com/1354092549/zhixue
 cd zhixue
 npm install
 bower install
-npm run package
+npm run dist
 ```
 
 ## Run
-The output file is `OutApp/zhixue-{platform}-{arch}/zhixue.exe`  
-eg. `OutApp/zhixue-win32-x64/zhixue.exe`
+The output file is in `OutApp`  

@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import { autoUpdater } from 'electron-updater';
 
 let mainWindow: Electron.BrowserWindow;
 
@@ -30,7 +31,10 @@ app.on("window-all-closed", () => {
         app.quit();
     }
 });
-app.on("ready", createWindow);
+app.on("ready", () => {
+    autoUpdater.checkForUpdatesAndNotify();
+    createWindow();
+});
 app.on("browser-window-created", (e, win) => {
     win.removeMenu();
 })
