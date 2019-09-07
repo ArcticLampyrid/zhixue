@@ -1,7 +1,14 @@
 import { zhixue } from "../server/zhixue";
 $(() => {
-    $("#login-button").on("click", () => {
+    $("#login-username").on("keydown", (e) => {
+        if (e.which == 13) {
+            e.preventDefault();
+            $("#login-password").focus();
+        }
+    });
+    $("#login-form").on("submit", (e) => {
         (async () => {
+            e.preventDefault();
             var username = $("#login-username").val() as string;
             var password = $("#login-password").val() as string;
             var info = await zhixue.login(username, password);

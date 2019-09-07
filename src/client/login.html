@@ -28,18 +28,20 @@
     <div class="d-flex align-items-center justify-content-center h-100">
         <div class="col-5">
             <h5 id="loginLabel" style="text-align: center;">登录</h5>
-            <div class="form-group">
-                <label for="login-username">用户</label>
-                <input type="text" class="form-control" id="login-username" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <label for="login-password">密码</label>
-                <input type="password" class="form-control" id="login-password" placeholder="Password">
-            </div>
-            <div id="placeForErrorAlert"></div>
-            <div class="d-flex flex-row-reverse">
-                <button type="button" class="btn btn-primary" id="login-button">登录</button>
-            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">用户</label>
+                    <input type="text" class="form-control" id="login-username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" class="form-control" id="login-password" placeholder="Password">
+                </div>
+                <div id="placeForErrorAlert"></div>
+                <div class="d-flex flex-row-reverse">
+                    <button type="submit" class="btn btn-primary" id="login-button">登录</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
