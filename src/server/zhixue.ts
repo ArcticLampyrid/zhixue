@@ -51,6 +51,22 @@ export module zhixue {
             paperList: PaperBasicInfo[],
         }
     }
+    export interface QuestionAnalysis {
+        isCorrect: boolean,
+        title: string,
+        userScore: number,
+        standardScore: number,
+        standardAnswerHtml: string,
+        userAnswerHtml: string,
+        contentHtml: string,
+        analysisHtml: string
+    }
+    export interface QuestionGroupInfo {
+        questions: QuestionAnalysis[]
+    }
+    export interface PaperAnalysis extends ApiResult {
+        result?: QuestionGroupInfo[]
+    }
     interface AuthHeader {
         authguid: string,
         authtimestamp: string,
@@ -131,7 +147,7 @@ export module zhixue {
                 "reportType": reportType,
                 "token": token
             };
-            var body = JSON.parse(await request.post("https://www.zhixue.com/zhixuebao/report/getPageExamList ", {
+            var body = JSON.parse(await request.post("https://www.zhixue.com/zhixuebao/report/getPageExamList", {
                 form: data,
                 headers: getAuthHeader()
             }));
@@ -171,7 +187,7 @@ export module zhixue {
                 "examId": examId,
                 "token": token
             };
-            var body = JSON.parse(await request.post("https://www.zhixue.com/zhixuebao/report/exam/getReportMain? ", {
+            var body = JSON.parse(await request.post("https://www.zhixue.com/zhixuebao/report/exam/getReportMain", {
                 form: data,
                 headers: getAuthHeader()
             }));
@@ -215,5 +231,71 @@ export module zhixue {
             errorInfo: "操作成功",
             result: "https://www.zhixue.com/studentanswer/index.html?" + querystring.stringify(data)
         };
+    }
+
+    export async function getPaperAnalysis(token: string, childId: string, paperId: string): Promise<PaperAnalysis> {
+        try {
+            var data = querystring.stringify({
+                "childId": childId,
+                "paperId": paperId,
+                "token": token
+            });
+            var body = JSON.parse(await request.get("https://www.zhixue.com/zhixuebao/report/getPaperAnalysis?" + data, {
+                headers: getAuthHeader()
+            }));
+            if (body.errorCode) {
+                return {
+                    errorCode: body.errorCode,
+                    errorInfo: body.errorInfo
+                };
+            }
+            var analysisResults = JSON.parse(body.result);
+            return {
+                errorCode: 0,
+                errorInfo: "操作成功",
+                result: (analysisResults.typeTopicAnalysis as Array<any>).map<QuestionGroupInfo>(x => {
+                    return {
+                        questions: (x.topicAnalysisDTOs as Array<any>).map<QuestionAnalysis>(item => {
+                            var standardAnswerHtml = "略";
+                            if (item.answerHtml && item.answerHtml != "略") {
+                                standardAnswerHtml = item.answerHtml;
+                            }
+                            else if (item.standardAnswer) {
+                                standardAnswerHtml = item.standardAnswer;
+                                if (item.answerType == "s02Image") {
+                                    standardAnswerHtml = "<img src=\"" + standardAnswerHtml + "\" />";
+                                }
+                            }
+
+                            var userAnswerHtml: string = "略";
+                            if (item.userAnswer) {
+                                userAnswerHtml = item.userAnswer;
+                            }
+                            else if (item.imageAnswer) {
+                                userAnswerHtml = (JSON.parse(item.imageAnswer) as Array<string>).map(x => {
+                                    return "<img src=\"" + x + "\" />"
+                                }).join("");
+                            }
+
+                            return {
+                                title: item.disTitleNumber,
+                                isCorrect: item.isCorrect,
+                                userScore: item.score,
+                                standardScore: item.standardScore,
+                                standardAnswerHtml: standardAnswerHtml,
+                                userAnswerHtml: userAnswerHtml,
+                                contentHtml: item.contentHtml || "略",
+                                analysisHtml: item.analysisHtml || "略"
+                            }
+                        })
+                    };
+                })
+            };
+        } catch (error) {
+            return {
+                errorCode: -1,
+                errorInfo: "发送请求失败：" + (error.message || "未知错误")
+            };
+        }
     }
 }

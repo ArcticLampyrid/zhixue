@@ -31,6 +31,7 @@ $(async () => {
             var studentAnserInfo = await zhixue.getStudentAnswerUrl(await TokenManager.getToken(), await TokenManager.getChildId(), paper.id);
             window.open(studentAnserInfo.result);
         });
+        $(node).find(".paper-viewQuestionAnalysis").attr("href", "paper_analysis.html?paperId=" + paper.id);
         $("#list-paper").append(node);
     }
 

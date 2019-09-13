@@ -22,8 +22,16 @@
         <p class="lead">这是一个由第三方提供的轻巧的智学网PC客户端（具有Windows/Linux/Mac版）<br />方便电脑端查分</p>
         <hr />
         <p>开始使用吧</p>
-        <a class="btn btn-secondary btn-lg" href="login.html" target="_top"
-            onclick="window.localStorage.clear(); window.sessionStorage.clear();">注销登录</a>
+        <div class="btn-toolbar justify-content-between">
+            <div>
+                <a class="btn btn-secondary btn-lg" href="login.html" target="_top"
+                    onclick="window.localStorage.clear(); window.sessionStorage.clear();">注销登录</a>
+            </div>
+            <div>
+                <button type="button" class="btn btn-link"
+                    onclick="require('electron').remote.getCurrentWebContents().openDevTools({mode:'right'});">DevTools</button>
+            </div>
+        </div>
         <hr />
         <div class="card">
             <div class="card-body">

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Examination</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <script>
+        window.$ = window.jQuery = require("../../bower_components/jquery/dist/jquery.slim.min.js");
+    </script>
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        require("../../dist/client/paper_analysis.js");
+    </script>
+    <style type="text/css">
+        .answer-not-correct .question-title {
+            color: red;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <template id="template-question">
+        <div class="list-group-item question-analysis">
+            <div class="row">
+                <div class="col-6">
+                    <p><span class="question-title"></span></p>
+                </div>
+                <div class="col-6">
+                    <p>得分：<span class="question-userScore"></span> / <span class="question-standardScore"></span></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="dropdown dropdown-content-type">
+                        <button class="btn btn-link dropdown-toggle dropdown-content-type-button p-0" type="button"
+                            data-toggle="dropdown">Loading...</button>
+                        <div class="dropdown-menu">
+                            <button type="button" class="dropdown-item dropdown-item-standardAnswer"
+                                x-data-name="standardAnswerHtml">标准答案</button>
+                            <button type="button" class="dropdown-item dropdown-item-userAnswer"
+                                x-data-name="userAnswerHtml">我的作答</button>
+                            <button type="button" class="dropdown-item dropdown-item-analysis"
+                                x-data-name="analysisHtml">试题解析</button>
+                            <button type="button" class="dropdown-item dropdown-item-content"
+                                x-data-name="contentHtml">考题内容</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="question-content"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="list-group" id="list-question"></div>
+
+</html>
