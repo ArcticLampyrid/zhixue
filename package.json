@@ -5,8 +5,8 @@
     "scripts": {
         "build": "tsc",
         "start": "npm run build && electron ./dist/server/main.js",
-        "dist": "npm run build && electron-builder --win --ia32 --publish never",
-        "publish": "npm run build && electron-builder --win --ia32 --publish always"
+        "dist": "npm run build && electron-builder --win --linux --ia32 --x64 --publish never",
+        "publish": "npm run build && electron-builder --win --linux --ia32 --x64 --publish always"
     },
     "author": {
         "name": "qiqiworld",
@@ -28,11 +28,16 @@
         "win": {
             "target": [
                 "nsis"
-            ],
-            "publish": [
-                "github"
             ]
-        }
+        },
+        "linux": {
+            "target": [
+                "AppImage"
+            ]
+        },
+        "publish": [
+            "github"
+        ]
     },
     "repository": "https://github.com/1354092549/zhixue",
     "license": "MIT",
