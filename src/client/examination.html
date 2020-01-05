@@ -12,14 +12,15 @@
     </script>
     <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
-            require("../../dist/client/examination.js");
+        require("../../dist/client/examination.js");
     </script>
 </head>
 
 <body>
     <template id="template-view-detail">
         <div class="list-group-item list-group-item-action">
-            <span class="exam-name"></span><span class="exam-notFinal d-none">（阅卷中）</span>
+            <span class="exam-name"></span>
+            <span class="exam-notFinal d-none badge badge-info float-right">阅卷中</span>
         </div>
     </template>
     <div class="list-group" id="list-exam">
