@@ -67,6 +67,30 @@ export module zhixue {
     export interface PaperAnalysis extends ApiResult {
         result?: QuestionGroupInfo[]
     }
+    export interface LevelRuleInfo {
+        lowBound: number,
+        upperBound: number,
+        name: string,
+        childLevel?: LevelRuleInfo[]
+    }
+    export interface PaperLevelInfo {
+        id: string,
+        name: string,
+        level: string
+    }
+    export interface PaperTrendInfo {
+        data: PaperLevelInfo[],
+        tag: {
+            code: string,
+            name: string
+        }
+    }
+    export interface LevelTrendResult extends ApiResult {
+        result?: {
+            levelRule: LevelRuleInfo[]
+            list: PaperTrendInfo[]
+        }
+    }
     interface AuthHeader {
         authguid: string,
         authtimestamp: string,
@@ -210,6 +234,58 @@ export module zhixue {
                             subjectName: x.subjectName
                         }
                     }),
+                }
+            };
+        } catch (error) {
+            return {
+                errorCode: -1,
+                errorInfo: "发送请求失败：" + (error.message || "未知错误")
+            };
+        }
+    }
+
+    export async function getLevelTrend(token: string, childId: string, examId: string, paperId: string): Promise<LevelTrendResult> {
+        try {
+            var data = querystring.stringify({
+                "examId": examId,
+                "paperId": paperId,
+                "pageIndex": 1,
+                "pageSize": 5,
+                "childId": childId,
+                "token": token
+            });
+            console.log("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data);
+            var body = JSON.parse(await request.get("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data,
+                {
+                    headers: getAuthHeader()
+                }
+            ));
+            if (body.errorCode) {
+                return {
+                    errorCode: body.errorCode,
+                    errorInfo: body.errorInfo
+                };
+            }
+            return {
+                errorCode: 0,
+                errorInfo: "操作成功",
+                result: {
+                    levelRule: body.result.levelList as Array<LevelRuleInfo>,
+                    list: (body.result.list as Array<any>).map<PaperTrendInfo>(x => {
+                        return {
+                            tag: {
+                                code: x.tag.code,
+                                name: x.tag.name
+                            },
+                            data: (x.dataList as Array<any>).map<PaperLevelInfo>(info => {
+                                return {
+                                    id: info.id,
+                                    name: info.name,
+                                    level: info.level
+                                }
+                            })
+                        }
+                    })
                 }
             };
         } catch (error) {
