@@ -1,7 +1,7 @@
 import * as request from 'request-promise-native';
 import * as crypto from 'crypto';
 import * as querystring from 'querystring';
-import * as uuid_v1 from 'uuid/v1';
+import { v1 as uuid_v1 } from 'uuid';
 
 export module zhixue {
     export interface ApiResult {
