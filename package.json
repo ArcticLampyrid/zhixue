@@ -47,6 +47,7 @@
     "dependencies": {
         "bootstrap": "^4.4.1",
         "chart.js": "^2.9.3",
+        "chartjs-plugin-datalabels": "^0.7.0",
         "custom-electron-titlebar": "^3.2.0",
         "electron-updater": "^4.3.1",
         "jquery": "^3.5.1",
@@ -61,6 +62,7 @@
         "@types/node": "12.12.21",
         "@types/request-promise-native": "^1.0.17",
         "@types/uuid": "^7.0.3",
+        "@types/chart.js": "^2.9.20",
         "electron": "^8.2.5",
         "electron-builder": "^22.6.0",
         "typescript": "^3.8.3"

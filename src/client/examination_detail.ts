@@ -4,7 +4,8 @@ import * as querystring from 'querystring';
 import * as Sugar from 'sugar';
 
 declare global {
-    var Chart: any;
+    var Chart: typeof import('chart.js');
+    var ChartDataLabels: any
 }
 
 $(async () => {
@@ -45,21 +46,24 @@ $(async () => {
         $("#exam-percentage").text(Sugar.Number.format(Sugar.Number.round(examPercentage, 2), 2) + "%");
         $("#exam-score-progress").width(examPercentage.toString() + "%");
 
-        var myRadarChart = new Chart(document.getElementById("radarChart") as HTMLCanvasElement, {
+        var chartLabels = info.result.paperList.map(x => x.subjectName);
+        var chartDataValue = info.result.paperList.map(x => x.userScore / x.standardScore * 100);
+        new Chart(document.getElementById("radarChart") as HTMLCanvasElement, {
             type: 'radar',
             data: {
-                labels: info.result.paperList.map(x => x.subjectName),
-                datasets: [{
-                    label: "",
-                    data: info.result.paperList.map(x => x.userScore / x.standardScore * 100),
-                    fill: true,
-                    backgroundColor: "rgba(54, 162, 235, 0.2)",
-                    borderColor: "rgb(54, 162, 235)",
-                    pointBackgroundColor: "rgb(54, 162, 235)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgb(54, 162, 235)"
-                }
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: "",
+                        data: chartDataValue,
+                        fill: true,
+                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                        borderColor: "rgb(54, 162, 235)",
+                        pointBackgroundColor: "rgb(54, 162, 235)",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgb(54, 162, 235)"
+                    }
                 ]
             },
             options: {
@@ -67,8 +71,9 @@ $(async () => {
                     display: false
                 },
                 tooltips: {
+                    displayColors: false,
                     callbacks: {
-                        label: x => Sugar.Number.format(Sugar.Number.round(x.yLabel, 2), 2) + "%",
+                        label: x => Sugar.Number.format(Sugar.Number.round(x.yLabel as number, 2), 2) + "%",
                         title: () => null,
                     }
                 },
@@ -76,12 +81,80 @@ $(async () => {
                     ticks: {
                         min: 0,
                         max: 100,
-                        callback: function (value: number) {
-                            return value + "%";
-                        }
+                        callback: x => x + "%"
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        display: false
                     }
                 }
             }
         });
+
+        new Chart(document.getElementById("barChart") as HTMLCanvasElement, {
+            plugins: [ChartDataLabels],
+            type: 'bar',
+            data: {
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: "",
+                        data: chartDataValue,
+                        fill: true,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)',
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderColor: "rgb(54, 162, 235)",
+                        pointBackgroundColor: "rgb(54, 162, 235)",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgb(54, 162, 235)"
+                    }
+                ]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    displayColors: false,
+                    callbacks: {
+                        label: (x) => info.result.paperList[x.index].userScore
+                            + " (" + Sugar.Number.format(Sugar.Number.round(x.yLabel as number, 2), 2) + "%)",
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 100,
+                            callback: x => x + "%"
+                        }
+                    }]
+                },
+                plugins: {
+                    datalabels: {
+                        formatter: (value, context) => info.result.paperList[context.dataIndex].userScore,
+                        align: "start",
+                        anchor: "end",
+                    }
+                }
+            }
+        });
+        $("#chart-save-button").click(() => {
+            var ctx = document.querySelector("#chart-tab-content .active canvas") as HTMLCanvasElement;
+            $("#chart-save-button").attr("href", ctx.toDataURL("image/png"));
+        })
     }
 });
