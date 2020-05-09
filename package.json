@@ -1,6 +1,6 @@
 {
     "name": "zhixue",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "main": "./dist/server/main.js",
     "scripts": {
         "build": "tsc",
@@ -10,8 +10,7 @@
     },
     "author": {
         "name": "qiqiworld",
-        "email": "1354092549@qq.com",
-        "url": "https://qiqiworld.tk/"
+        "email": "1354092549@qq.com"
     },
     "build": {
         "files": [
