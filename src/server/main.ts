@@ -15,6 +15,7 @@ function createWindow() {
             nodeIntegration: true,
             nodeIntegrationInWorker: true,
             nodeIntegrationInSubFrames: true,
+            enableRemoteModule: true,
             preload: path.join(__dirname, "titlebar.js")
         }
     });

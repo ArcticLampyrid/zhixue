@@ -1,6 +1,6 @@
 import { Titlebar, Color } from 'custom-electron-titlebar'
-if (self == top) {
-    document.onreadystatechange = function () {
+if (process.isMainFrame) {
+    document.addEventListener('readystatechange', () => {
         if (document.readyState == "interactive") {
             new Titlebar({
                 backgroundColor: Color.LIGHTGREY,
@@ -8,5 +8,5 @@ if (self == top) {
                 titleHorizontalAlignment: "left"
             });
         }
-    };
+    });
 }
