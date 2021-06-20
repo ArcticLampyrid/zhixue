@@ -1,9 +1,9 @@
 import { zhixue } from "../server/zhixue";
 $(() => {
     $("#login-username").on("keydown", (e) => {
-        if (e.which == 13) {
+        if (e.code == "Enter" || e.code == "NumpadEnter") {
             e.preventDefault();
-            $("#login-password").focus();
+            $("#login-password").trigger('focus');
         }
     });
     $("#login-form").on("submit", (e) => {
