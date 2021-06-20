@@ -46,10 +46,10 @@
     "dependencies": {
         "bootstrap": "^4.6.0",
         "chart.js": "^2.9.4",
-        "chartjs-plugin-datalabels": "^0.7.0",
-        "custom-electron-titlebar": "^3.2.6",
-        "electron-updater": "^4.3.5",
-        "jquery": "^3.5.1",
+        "chartjs-plugin-datalabels": "^1.0.0",
+        "custom-electron-titlebar": "^3.2.7",
+        "electron-updater": "^4.3.9",
+        "jquery": "^3.6.0",
         "request": "^2.88.2",
         "request-promise-native": "^1.0.9",
         "sugar": "^2.0.6",
@@ -57,13 +57,13 @@
     },
     "devDependencies": {
         "@types/bootstrap": "^4.6.0",
-        "@types/jquery": "^3.5.1",
-        "@types/node": "12.12.21",
+        "@types/jquery": "^3.5.5",
+        "@types/node": "14.17.3",
         "@types/request-promise-native": "^1.0.17",
         "@types/uuid": "^8.3.0",
-        "@types/chart.js": "^2.9.31",
-        "electron": "^9.4.3",
-        "electron-builder": "^22.9.1",
-        "typescript": "^4.2.2"
+        "@types/chart.js": "^2.9.32",
+        "electron": "^12.0.11",
+        "electron-builder": "^22.11.7",
+        "typescript": "^4.3.4"
     }
 }
