@@ -1,7 +1,8 @@
-import * as request from 'request-promise-native';
+import fetch, { Headers } from 'node-fetch';
 import * as crypto from 'crypto';
 import * as querystring from 'querystring';
 import { v1 as uuid_v1 } from 'uuid';
+import { URLSearchParams } from 'url'
 
 export module zhixue {
     export interface ApiResult {
@@ -91,27 +92,23 @@ export module zhixue {
             list: PaperTrendInfo[]
         }
     }
-    interface AuthHeader {
-        authguid: string,
-        authtimestamp: string,
-        authtoken: string,
-        authbizcode: string
-    }
     function encodePassword(password: string): string {
         var cipher = crypto.createCipheriv("rc4", "iflytek_pass_edp", "");
         var crypted = cipher.update(password, "utf8", "hex");
         crypted += cipher.final("hex");
         return crypted;
     }
-    function getAuthHeader(): AuthHeader {
-        var result: AuthHeader = {
-            authguid: uuid_v1(),
-            authtimestamp: new Date().getTime().toString(),
-            authtoken: null,
-            authbizcode: "0001"
-        };
-        result.authtoken = crypto.createHash("md5").update(result.authguid + result.authtimestamp + "iflytek!@#123student").digest("hex");
-        return result;
+    function getAuthHeader(): Headers {
+        const headers = new Headers();
+        var authguid = uuid_v1()
+        var authtimestamp = new Date().getTime().toString()
+        var authbizcode = "0001"
+        var authtoken = crypto.createHash("md5").update(authguid + authtimestamp + "iflytek!@#123student").digest("hex")
+        headers.append("authguid", authguid);
+        headers.append("authtimestamp", authtimestamp)
+        headers.append("authtoken", authtoken);
+        headers.append("authbizcode", authbizcode)
+        return headers;
     }
     export async function login(username: string, password: string): Promise<LoginResult> {
         try {
@@ -130,7 +127,8 @@ export module zhixue {
                     "encrypt": ["password"]
                 })
             });
-            var body = JSON.parse(await request.get("https://www.zhixue.com/container/app/parWeakCheckLogin?" + data));
+            var response = await fetch("https://www.zhixue.com/container/app/parWeakCheckLogin?" + data)
+            var body = await response.json()
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -163,18 +161,20 @@ export module zhixue {
     }
     export async function getExemList(token: string, childId: string, pageIndex: number, pageSize: number, reportType: string = "exam"): Promise<GetExamListResult> {
         try {
-            var data = {
-                "actualPosition": 0,
+            var data = new URLSearchParams({
+                "actualPosition": '0',
                 "childId": childId,
-                "pageIndex": pageIndex,
-                "pageSize": pageSize,
+                "pageIndex": pageIndex.toString(),
+                "pageSize": pageSize.toString(),
                 "reportType": reportType,
                 "token": token
-            };
-            var body = JSON.parse(await request.post("https://www.zhixue.com/zhixuebao/report/getPageExamList", {
-                form: data,
+            });
+            var response = await fetch("https://www.zhixue.com/zhixuebao/report/getPageExamList", {
+                method: "post",
+                body: data,
                 headers: getAuthHeader()
-            }));
+            })
+            var body = await response.json()
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -206,15 +206,17 @@ export module zhixue {
 
     export async function getExemInfo(token: string, childId: string, examId: string): Promise<ExamReportResult> {
         try {
-            var data = {
+            var data = new URLSearchParams({
                 "childId": childId,
                 "examId": examId,
                 "token": token
-            };
-            var body = JSON.parse(await request.post("https://www.zhixue.com/zhixuebao/report/exam/getReportMain", {
-                form: data,
+            });
+            var response = await fetch("https://www.zhixue.com/zhixuebao/report/exam/getReportMain", {
+                method: "post",
+                body: data,
                 headers: getAuthHeader()
-            }));
+            })
+            var body = await response.json()
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -254,12 +256,10 @@ export module zhixue {
                 "childId": childId,
                 "token": token
             });
-            console.log("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data);
-            var body = JSON.parse(await request.get("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data,
-                {
-                    headers: getAuthHeader()
-                }
-            ));
+            var response = await fetch("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data, {
+                headers: getAuthHeader()
+            })
+            var body = await response.json()
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -315,17 +315,18 @@ export module zhixue {
                 "childId": childId,
                 "paperId": paperId,
                 "token": token
-            });
-            var body = JSON.parse(await request.get("https://www.zhixue.com/zhixuebao/report/getPaperAnalysis?" + data, {
+            });       
+            var response = await fetch("https://www.zhixue.com/zhixuebao/report/getPaperAnalysis?" + data, {
                 headers: getAuthHeader()
-            }));
+            })
+            var body = await response.json()
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
                     errorInfo: body.errorInfo
                 };
             }
-            var analysisResults = JSON.parse(body.result);
+            var analysisResults = JSON.parse(body.result)
             return {
                 errorCode: 0,
                 errorInfo: "操作成功",

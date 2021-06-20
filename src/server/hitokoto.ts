@@ -1,4 +1,4 @@
-import * as request from 'request-promise-native';
+import fetch from 'node-fetch';
 export interface HitokotoResult {
     id: number,
     hitokoto: string,
@@ -9,6 +9,6 @@ export interface HitokotoResult {
 }
 
 export async function hitokoto(c?: string): Promise<HitokotoResult> {
-    return JSON.parse(await request.get("https://v1.hitokoto.cn/?" +
-        (c ? "c=" + c : "")));
+    const response = await fetch("https://v1.hitokoto.cn/?" + (c ? "c=" + c : ""));
+    return await response.json();
 }
