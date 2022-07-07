@@ -296,11 +296,12 @@ export module zhixue {
         }
     }
 
-    export async function getStudentAnswerUrl(token: string, childId: string, paperId: string): Promise<StudentAnswerUrlResult> {
+    export async function getStudentAnswerUrl(token: string, childId: string, paperId: string, examId:string): Promise<StudentAnswerUrlResult> {
         var data = {
             "userId": childId,
             "token": token,
-            "paperId": paperId
+            "paperId": paperId,
+            "examId" : examId
         };
         return {
             errorCode: 0,
