@@ -29,7 +29,7 @@ $(async () => {
         $(node).find(".paper-percentage").text(Sugar.Number.format(Sugar.Number.round(paperPercentage, 2), 2) + "%");
         $(node).find(".paper-score-progress").width(paperPercentage.toString() + "%");
         $(node).find(".paper-viewStudentAnswer").on("click", async e => {
-            var studentAnserInfo = await zhixue.getStudentAnswerUrl(await TokenManager.getToken(), await TokenManager.getChildId(), paper.id);
+            var studentAnserInfo = await zhixue.getStudentAnswerUrl(await TokenManager.getToken(), await TokenManager.getChildId(), paper.id, examId);
             window.open(studentAnserInfo.result);
         });
         $(node).find(".paper-viewQuestionAnalysis").attr("href", "paper_analysis.html?paperId=" + paper.id);
