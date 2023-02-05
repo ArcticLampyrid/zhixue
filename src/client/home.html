@@ -29,7 +29,7 @@
             </div>
             <div>
                 <button type="button" class="btn btn-link"
-                    onclick="require('electron').remote.getCurrentWebContents().openDevTools({mode:'right'});">DevTools</button>
+                    onclick="require('electron').ipcRenderer.send('open-dev-tools',{mode:'right'});">DevTools</button>
             </div>
         </div>
         <hr />

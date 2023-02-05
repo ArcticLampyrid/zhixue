@@ -4,8 +4,8 @@ import * as querystring from 'querystring';
 import * as Sugar from 'sugar';
 
 declare global {
-    var Chart: typeof import('chart.js');
-    var ChartDataLabels: any
+    var Chart: typeof import('chart.js').Chart;
+    var ChartDataLabels: typeof import('chartjs-plugin-datalabels').default;
 }
 
 $(async () => {
@@ -67,26 +67,25 @@ $(async () => {
                 ]
             },
             options: {
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    displayColors: false,
-                    callbacks: {
-                        label: x => Sugar.Number.format(Sugar.Number.round(x.yLabel as number, 2), 2) + "%",
-                        title: () => null,
-                    }
-                },
-                scale: {
-                    ticks: {
+                scales: {
+                    r: {
                         min: 0,
                         max: 100,
-                        callback: x => x + "%"
+                        ticks: {
+                            callback: x => `${x}%`
+                        }
                     }
                 },
                 plugins: {
-                    datalabels: {
+                    legend: {
                         display: false
+                    },
+                    tooltip: {
+                        displayColors: false,
+                        callbacks: {
+                            label: x => Sugar.Number.format(Sugar.Number.round(chartDataValue[x.dataIndex], 2), 2) + "%",
+                            title: () => null,
+                        }
                     }
                 }
             }
@@ -124,26 +123,26 @@ $(async () => {
                 ]
             },
             options: {
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    displayColors: false,
-                    callbacks: {
-                        label: (x) => info.result.paperList[x.index].userScore
-                            + " (" + Sugar.Number.format(Sugar.Number.round(x.yLabel as number, 2), 2) + "%)",
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            callback: x => `${x}%`
+                        }
                     }
                 },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            min: 0,
-                            max: 100,
-                            callback: x => x + "%"
-                        }
-                    }]
-                },
                 plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        displayColors: false,
+                        callbacks: {
+                            label: (x) => info.result.paperList[x.dataIndex].userScore
+                                + " (" + Sugar.Number.format(Sugar.Number.round(chartDataValue[x.dataIndex], 2), 2) + "%)",
+                        }
+                    },
                     datalabels: {
                         formatter: (value, context) => info.result.paperList[context.dataIndex].userScore,
                         align: "start",

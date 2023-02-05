@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2022",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
@@ -9,7 +9,10 @@
             "node",
             "jquery",
             "bootstrap"
-        ]
+        ],
+        // FIXME
+        // https://github.com/AlexTorresDev/custom-electron-titlebar/issues/198
+        "skipLibCheck": true
     },
     "include": [
         "./src/**/*"

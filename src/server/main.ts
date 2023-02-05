@@ -1,8 +1,15 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
 import { autoUpdater } from 'electron-updater';
+import { setupTitlebar, attachTitlebarToWindow } from "custom-electron-titlebar/main";
 
 let mainWindow: Electron.BrowserWindow;
+
+setupTitlebar();
+ipcMain.on('open-dev-tools', (event, options) => {
+    const webContents = event.sender
+    webContents.openDevTools(options);
+})
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -15,7 +22,6 @@ function createWindow() {
             nodeIntegration: true,
             nodeIntegrationInWorker: true,
             nodeIntegrationInSubFrames: true,
-            enableRemoteModule: true,
             contextIsolation: false,
             preload: path.join(__dirname, "titlebar.js")
         }
@@ -26,6 +32,8 @@ function createWindow() {
     mainWindow.on("closed", () => {
         mainWindow = null;
     });
+
+    attachTitlebarToWindow(mainWindow);
 }
 
 app.on("window-all-closed", () => {

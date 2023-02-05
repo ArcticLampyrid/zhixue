@@ -128,7 +128,7 @@ export module zhixue {
                 })
             });
             var response = await fetch("https://www.zhixue.com/container/app/parWeakCheckLogin?" + data)
-            var body = await response.json()
+            var body = await response.json() as any
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -174,7 +174,7 @@ export module zhixue {
                 body: data,
                 headers: getAuthHeader()
             })
-            var body = await response.json()
+            var body = await response.json() as any
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -216,7 +216,7 @@ export module zhixue {
                 body: data,
                 headers: getAuthHeader()
             })
-            var body = await response.json()
+            var body = await response.json() as any
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -259,7 +259,7 @@ export module zhixue {
             var response = await fetch("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data, {
                 headers: getAuthHeader()
             })
-            var body = await response.json()
+            var body = await response.json() as any
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,
@@ -319,7 +319,7 @@ export module zhixue {
             var response = await fetch("https://www.zhixue.com/zhixuebao/report/getPaperAnalysis?" + data, {
                 headers: getAuthHeader()
             })
-            var body = await response.json()
+            var body = await response.json() as any
             if (body.errorCode) {
                 return {
                     errorCode: body.errorCode,

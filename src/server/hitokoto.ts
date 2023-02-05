@@ -10,5 +10,5 @@ export interface HitokotoResult {
 
 export async function hitokoto(c?: string): Promise<HitokotoResult> {
     const response = await fetch("https://v1.hitokoto.cn/?" + (c ? "c=" + c : ""));
-    return await response.json();
+    return (await response.json()) as HitokotoResult;
 }

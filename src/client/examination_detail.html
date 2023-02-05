@@ -11,8 +11,7 @@
         window.$ = window.jQuery = require("../../node_modules/jquery/dist/jquery.slim.min.js");
     </script>
     <script type="text/javascript" src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../../node_modules/chart.js/dist/Chart.min.css" type="text/css">
-    <script type="text/javascript" src="../../node_modules/chart.js/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/chart.js/dist/Chart.umd.js"></script>
     <script type="text/javascript"
         src="../../node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
     <script>
@@ -50,19 +49,24 @@
             </div>
             <ul class="nav nav-tabs border-bottom-0 mt-3">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" id="radarChart-tab"
-                        href="#radarChart-container">雷达图</a>
+                    <button class="nav-link active" data-bs-toggle="tab" id="radarChart-tab"
+                        data-bs-target="#radarChart-container">雷达图</button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" id="barChart-tab" href="#barChart-container">柱状图</a>
+                    <button class="nav-link" data-bs-toggle="tab" id="barChart-tab"
+                        data-bs-target="#barChart-container">柱状图</button>
                 </li>
             </ul>
             <div class="tab-content border" id="chart-tab-content">
                 <div class="tab-pane fade show active" id="radarChart-container">
-                    <canvas id="radarChart" style="max-width: 500px;" class="mx-auto mt-3"></canvas>
+                    <div style="width: 500px;" class="mx-auto">
+                        <canvas id="radarChart"></canvas>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="barChart-container">
-                    <canvas id="barChart" style="max-width: 500px;" class="mx-auto mt-3"></canvas>
+                    <div style="width: 500px;" class="mx-auto">
+                        <canvas id="barChart"></canvas>
+                    </div>
                 </div>
                 <a id="chart-save-button" class="btn btn-link text-right d-block" download="result.png" href="">保存</a>
             </div>
