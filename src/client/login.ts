@@ -1,4 +1,5 @@
 import { zhixue } from "../server/zhixue";
+import { TokenManager } from "./TokenManager";
 $(() => {
     $("#login-username").on("keydown", (e) => {
         if (e.code == "Enter" || e.code == "NumpadEnter") {
@@ -20,15 +21,9 @@ $(() => {
                     .empty()
                     .append(node);
             } else {
-                window.sessionStorage.setItem("zhixue-token", info.result.token);
-                window.sessionStorage.setItem("zhixue-token-expiTime", (new Date().getTime() + 10 * 60 * 1000 /*10 minutes*/).toString());
-
                 window.localStorage.setItem("zhixue-username", username);
                 window.localStorage.setItem("zhixue-password", password);
-                window.localStorage.setItem("zhixue-childId", info.result.childId);
-                window.localStorage.setItem("zhixue-user-name", info.result.user.name);
-                window.localStorage.setItem("zhixue-class-name", info.result.class.name);
-                window.localStorage.setItem("zhixue-school-name", info.result.school.name);
+                TokenManager.saveLoginInfo(info);
                 window.location.href = "index.html";
             }
         })();
