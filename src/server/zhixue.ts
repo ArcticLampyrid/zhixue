@@ -19,6 +19,8 @@ export module zhixue {
             childId: string
             user: {
                 name: string
+                avatar: string
+                code: string
             },
             class: {
                 name: string
@@ -142,7 +144,9 @@ export module zhixue {
                     token: body.result.token,
                     childId: body.result.id,
                     user: {
-                        name: body.result.name
+                        name: body.result.name,
+                        avatar: body.result.userInfo.avatar,
+                        code: body.result.userInfo.code
                     },
                     class: {
                         name: body.result.clazzInfo.name

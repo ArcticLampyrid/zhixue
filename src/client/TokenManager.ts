@@ -26,6 +26,8 @@ export module TokenManager {
         window.sessionStorage.setItem("zhixue-token-expiTime", (new Date().getTime() + 10 * 60 * 1000 /*10 minutes*/).toString());
         window.localStorage.setItem("zhixue-childId", info.result.childId);
         window.localStorage.setItem("zhixue-user-name", info.result.user.name);
+        window.localStorage.setItem("zhixue-user-code", info.result.user.code);
+        window.localStorage.setItem("zhixue-user-avatar", info.result.user.avatar);
         window.localStorage.setItem("zhixue-class-name", info.result.class.name);
         window.localStorage.setItem("zhixue-school-name", info.result.school.name);
     }
