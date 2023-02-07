@@ -11,7 +11,7 @@ async function loadMore() {
     var pageIndex = $("#list-exam").children().length / pageSize + 1;
     var info = await zhixue.getExemList(await TokenManager.getToken(), await TokenManager.getChildId(), pageIndex, pageSize, param["reportType"] as string || "exam");
     if (info.errorCode) {
-        alert(info.errorCode);
+        alert("(code: " + info.errorCode + ")" + info.errorInfo);
         return;
     }
 

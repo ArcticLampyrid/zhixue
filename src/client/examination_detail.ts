@@ -14,7 +14,7 @@ $(async () => {
 
     var info = await zhixue.getExemInfo(await TokenManager.getToken(), await TokenManager.getChildId(), examId);
     if (info.errorCode) {
-        alert(info.errorCode);
+        alert("(code: " + info.errorCode + ")" + info.errorInfo);
         return;
     }
 

@@ -9,7 +9,7 @@ $(async () => {
 
     var info = await zhixue.getPaperAnalysis(await TokenManager.getToken(), await TokenManager.getChildId(), paperId);
     if (info.errorCode) {
-        alert(info.errorCode);
+        alert("(code: " + info.errorCode + ")" + info.errorInfo);
         return;
     }
 
