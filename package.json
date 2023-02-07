@@ -1,6 +1,6 @@
 {
     "name": "zhixue",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "main": "./dist/server/main.js",
     "scripts": {
         "build": "tsc",
