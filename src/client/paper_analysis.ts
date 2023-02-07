@@ -12,7 +12,12 @@ $(async () => {
         alert("(code: " + info.errorCode + ")" + info.errorInfo);
         return;
     }
-
+    if (info.result.length == 0) {
+        var templateNoAnalysisContent = document.querySelector<HTMLTemplateElement>("#template-no-analysis").content;
+        var node = document.importNode(templateNoAnalysisContent, true);
+        $("#list-question").append(node);
+        return;
+    }
     var templateContent = document.querySelector<HTMLTemplateElement>("#template-question").content;
     for (let group of info.result) {
         for (let question of group.questions) {
