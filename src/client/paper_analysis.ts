@@ -1,9 +1,26 @@
 import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
 import * as querystring from 'querystring';
-import * as Sugar from 'sugar';
-
+const katex = require('katex');
 $(async () => {
+    var processHtmlContent = (originHtml: string) => {
+        const tempDoc = document.implementation.createHTMLDocument("latex-render");
+        tempDoc.body.innerHTML = originHtml;
+        $(tempDoc).find("img[data-latex]").replaceWith(function () {
+            const latexStr = decodeURIComponent(this.getAttribute("data-latex"));
+            try {
+                return katex.renderToString(latexStr, {
+                    throwOnError: true,
+                    strict: false
+                });
+            } catch (e) {
+                console.error("failed to render math expression (latex), fallback to image.", e);
+                return this;
+            }
+        });
+        return tempDoc.body.innerHTML;
+    }
+
     var param = querystring.parse(window.location.search.substr(1));
     var paperId = param.paperId as string;
 
@@ -29,13 +46,14 @@ $(async () => {
             $(node).find(".question-userScore").text(question.userScore);
             $(node).find(".question-standardScore").text(question.standardScore);
 
-            $(node).find(".question-content").html(question.standardAnswerHtml);
+            $(node).find(".question-content").html(processHtmlContent(question.standardAnswerHtml));
             $(node).find(".dropdown-content-type-button").text($(node).find(".dropdown-item-standardAnswer").text());
 
             $(node).find(".dropdown-item").on("click", (e) => {
                 e.preventDefault();
                 var root = $(e.target).parents(".question-analysis");
-                root.find(".question-content").html(question[$(e.target).attr("x-data-name")]);
+                var originHtml = question[$(e.target).attr("x-data-name")];
+                root.find(".question-content").html(processHtmlContent(originHtml));
                 root.find(".dropdown-content-type-button").text($(e.target).text());
             });
             $("#list-question").append(node);
