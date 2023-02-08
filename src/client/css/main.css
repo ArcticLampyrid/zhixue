@@ -1,4 +1,19 @@
-body {
-    background-color: #2d2d2d;
-    color: #eee;
+:root {
+    --zx-bar-bg-color: #d3d3d3;
+    --zx-bar-text-color: #000000;
+}
+
+[data-bs-theme="dark"] {
+    --zx-bar-bg-color: #333333;
+    --zx-bar-text-color: #c4c4c4;
+}
+
+#zx-sidebar {
+    background-color: var(--zx-bar-bg-color);
+    color: var(--zx-bar-text-color);
+    margin: 0%;
+}
+
+[data-bs-theme="dark"] .question-content img {
+    filter: invert(1) hue-rotate(180deg);
 }
