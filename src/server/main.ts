@@ -19,15 +19,16 @@ function createWindow() {
         minWidth: 800,
         frame: false,
         webPreferences: {
-            nodeIntegration: true,
-            nodeIntegrationInWorker: true,
+            nodeIntegration: false,
+            nodeIntegrationInWorker: false,
             nodeIntegrationInSubFrames: true,
-            contextIsolation: false,
-            preload: path.join(__dirname, "titlebar.js")
+            sandbox: false,
+            contextIsolation: true,
+            preload: path.join(__dirname, "preload.js")
         }
     });
 
-    mainWindow.loadFile(path.join(__dirname, "../../src/client/index.html"));
+    mainWindow.loadFile(path.join(__dirname, "../client/index.html"));
 
     mainWindow.on("closed", () => {
         mainWindow = null;

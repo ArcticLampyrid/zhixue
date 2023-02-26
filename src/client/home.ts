@@ -1,4 +1,6 @@
-import { hitokoto } from "../server/hitokoto";
+import { hitokoto } from "./hitokoto";
+import * as $ from 'jquery';
+import 'bootstrap';
 async function updateHitokoto() {
     var info = await hitokoto();
     $("#hitokoto").text(info.hitokoto)

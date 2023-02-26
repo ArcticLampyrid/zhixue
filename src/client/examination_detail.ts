@@ -1,12 +1,9 @@
-import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
 import * as Sugar from 'sugar';
-
-declare global {
-    var Chart: typeof import('chart.js').Chart;
-    var ChartDataLabels: typeof import('chartjs-plugin-datalabels').default;
-}
-
+import { Chart } from 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import * as $ from 'jquery';
+import 'bootstrap';
 $(async () => {
     var param = new URLSearchParams(window.location.search.substring(1));
     var examId = param.get("examId") as string;

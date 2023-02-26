@@ -1,3 +1,9 @@
+@import "~bootstrap/scss/bootstrap";
+
+* {
+    transition: background .5s;
+}
+
 :root {
     --zx-bar-bg-color: #d3d3d3;
     --zx-bar-text-color: #000000;

@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 export interface HitokotoResult {
     id: number,
     hitokoto: string,

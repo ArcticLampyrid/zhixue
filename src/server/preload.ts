@@ -1,4 +1,10 @@
 import { Titlebar, Color } from 'custom-electron-titlebar'
+import { zhixue } from './zhixue'
+import { contextBridge, ipcRenderer } from 'electron';
+contextBridge.exposeInMainWorld('openDevTools', (params: any) => {
+    ipcRenderer.send('open-dev-tools', params);
+});
+contextBridge.exposeInMainWorld('zhixue', zhixue);
 if (process.isMainFrame) {
     document.addEventListener('readystatechange', () => {
         if (document.readyState == "interactive") {

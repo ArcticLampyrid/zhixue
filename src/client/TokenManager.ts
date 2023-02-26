@@ -1,4 +1,3 @@
-import { zhixue } from "../server/zhixue";
 export module TokenManager {
     export async function getToken(): Promise<string> {
         if (Number.parseInt(window.sessionStorage.getItem("zhixue-token-expiTime"), 10) < new Date().getTime()) {
@@ -21,7 +20,7 @@ export module TokenManager {
     export async function getChildId(): Promise<string> {
         return window.localStorage.getItem("zhixue-childId");
     }
-    export function saveLoginInfo(info: zhixue.LoginResult) {
+    export function saveLoginInfo(info: import('../server/zhixue').zhixue.LoginResult) {
         window.sessionStorage.setItem("zhixue-token", info.result.token);
         window.sessionStorage.setItem("zhixue-token-expiTime", (new Date().getTime() + 10 * 60 * 1000 /*10 minutes*/).toString());
         window.localStorage.setItem("zhixue-childId", info.result.childId);

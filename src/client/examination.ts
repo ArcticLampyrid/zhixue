@@ -1,5 +1,6 @@
-import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
+import * as $ from 'jquery';
+import 'bootstrap';
 async function loadMore() {
     var param = new URLSearchParams(window.location.search.substring(1));
 

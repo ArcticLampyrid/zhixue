@@ -5,11 +5,23 @@
     "tasks": [
         {
             "type": "typescript",
-            "tsconfig": "tsconfig.json",
+            "tsconfig": "tsconfig_server.json",
             "problemMatcher": [
                 "$tsc"
             ],
-            "label": "build"
+            "label": "Build Server Code"
+        },
+        {
+            "type": "shell",
+            "command": "npx webpack build",
+            "label": "Build Client Code"
+        },
+        {
+            "label": "Build",
+            "dependsOn": [
+                "Build Server Code",
+                "Build Client Code"
+            ]
         }
     ]
 }

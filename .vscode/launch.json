@@ -9,7 +9,7 @@
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "build",
+            "preLaunchTask": "Build",
             "runtimeExecutable": "${workspaceRoot}\\node_modules\\.bin\\electron.cmd",
             "runtimeArgs": [
                 "--no-lazy"

@@ -1,11 +1,10 @@
-// only for IDE
 {
     "compilerOptions": {
         "target": "es2022",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "./fake_dist",
+        "sourceMap": false,
+        "outDir": "./dist/server",
         "types": [
             "node"
         ],
@@ -14,6 +13,6 @@
         "skipLibCheck": true
     },
     "include": [
-        "./src/**/*"
+        "./src/server/*"
     ]
 }

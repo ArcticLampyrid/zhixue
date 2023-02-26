@@ -1,5 +1,6 @@
-import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
+import * as $ from 'jquery';
+import 'bootstrap';
 $(() => {
     $("#login-username").on("keydown", (e) => {
         if (e.code == "Enter" || e.code == "NumpadEnter") {

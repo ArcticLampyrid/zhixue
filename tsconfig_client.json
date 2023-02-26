@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es2022",
+        "module": "es2022",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "outDir": "./dist/client",
+        "types": []
+    },
+    "include": [
+        "./src/client/*"
+    ]
+}

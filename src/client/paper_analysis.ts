@@ -1,5 +1,7 @@
-import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
+import * as $ from 'jquery';
+import 'bootstrap';
+import 'katex/dist/katex.css';
 const katex = require('katex');
 $(async () => {
     var processHtmlContent = (originHtml: string) => {
