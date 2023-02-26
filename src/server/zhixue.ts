@@ -1,6 +1,5 @@
 import fetch, { Headers } from 'node-fetch';
 import * as crypto from 'crypto';
-import * as querystring from 'querystring';
 import { v1 as uuid_v1 } from 'uuid';
 import { URLSearchParams } from 'url'
 
@@ -122,13 +121,13 @@ export module zhixue {
             }
 
             var encodedPassword = encodePassword(password);
-            var data = querystring.stringify({
+            var data = new URLSearchParams({
                 "loginName": username,
                 "password": encodedPassword,
                 "description": JSON.stringify({
                     "encrypt": ["password"]
                 })
-            });
+            }).toString();
             var response = await fetch("https://www.zhixue.com/container/app/parWeakCheckLogin?" + data)
             var body = await response.json() as any
             if (body.errorCode) {
@@ -252,14 +251,14 @@ export module zhixue {
 
     export async function getLevelTrend(token: string, childId: string, examId: string, paperId: string): Promise<LevelTrendResult> {
         try {
-            var data = querystring.stringify({
+            var data = new URLSearchParams({
                 "examId": examId,
                 "paperId": paperId,
-                "pageIndex": 1,
-                "pageSize": 5,
+                "pageIndex": '1',
+                "pageSize": '5',
                 "childId": childId,
                 "token": token
-            });
+            }).toString();
             var response = await fetch("https://www.zhixue.com/zhixuebao/report/paper/getLevelTrend?" + data, {
                 headers: getAuthHeader()
             })
@@ -301,26 +300,26 @@ export module zhixue {
     }
 
     export async function getStudentAnswerUrl(token: string, childId: string, paperId: string, examId:string): Promise<StudentAnswerUrlResult> {
-        var data = {
+        var data = new URLSearchParams({
             "userId": childId,
             "token": token,
             "paperId": paperId,
             "examId" : examId
-        };
+        }).toString();
         return {
             errorCode: 0,
             errorInfo: "操作成功",
-            result: "https://www.zhixue.com/studentanswer/index.html?" + querystring.stringify(data)
+            result: "https://www.zhixue.com/studentanswer/index.html?" + data
         };
     }
 
     export async function getPaperAnalysis(token: string, childId: string, paperId: string): Promise<PaperAnalysis> {
         try {
-            var data = querystring.stringify({
+            var data = new URLSearchParams({
                 "childId": childId,
                 "paperId": paperId,
                 "token": token
-            });       
+            }).toString();       
             var response = await fetch("https://www.zhixue.com/zhixuebao/report/getPaperAnalysis?" + data, {
                 headers: getAuthHeader()
             })

@@ -1,6 +1,5 @@
 import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
-import * as querystring from 'querystring';
 const katex = require('katex');
 $(async () => {
     var processHtmlContent = (originHtml: string) => {
@@ -21,8 +20,8 @@ $(async () => {
         return tempDoc.body.innerHTML;
     }
 
-    var param = querystring.parse(window.location.search.substr(1));
-    var paperId = param.paperId as string;
+    var param = new URLSearchParams(window.location.search.substring(1));
+    var paperId = param.get("paperId") as string;
 
     var info = await zhixue.getPaperAnalysis(await TokenManager.getToken(), await TokenManager.getChildId(), paperId);
     if (info.errorCode) {

@@ -1,8 +1,7 @@
 import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
-import * as querystring from 'querystring';
 async function loadMore() {
-    var param = querystring.parse(window.location.search.substr(1));
+    var param = new URLSearchParams(window.location.search.substring(1));
 
     $("#btn-more")
         .text("Loading...")

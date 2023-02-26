@@ -1,6 +1,5 @@
 import { zhixue } from "../server/zhixue";
 import { TokenManager } from "./TokenManager";
-import * as querystring from 'querystring';
 import * as Sugar from 'sugar';
 
 declare global {
@@ -9,8 +8,8 @@ declare global {
 }
 
 $(async () => {
-    var param = querystring.parse(window.location.search.substr(1));
-    var examId = param.examId as string;
+    var param = new URLSearchParams(window.location.search.substring(1));
+    var examId = param.get("examId") as string;
 
     var info = await zhixue.getExemInfo(await TokenManager.getToken(), await TokenManager.getChildId(), examId);
     if (info.errorCode) {
