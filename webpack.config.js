@@ -10,7 +10,7 @@ const pages = [
 
 
 module.exports = {
-    mode: "development",
+    mode: process.env.NODE_ENV || 'development',
     entry: Object.assign({
         "ThemeApplier": "./src/client/ThemeApplier.ts",
         "css": "./src/client/scss/main.scss"

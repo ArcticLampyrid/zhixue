@@ -2,6 +2,9 @@ name: Build/release
 
 on: push
 
+env:
+  NODE_ENV: production
+
 jobs:
   release:
     runs-on: ${{ matrix.os }}
