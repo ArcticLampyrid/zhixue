@@ -1,5 +1,4 @@
 import { TokenManager } from "./TokenManager";
-import * as Sugar from 'sugar';
 import { Chart } from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import * as $ from 'jquery';
@@ -22,7 +21,7 @@ $(async () => {
         $(node).find(".paper-userScore").text(paper.userScore);
         $(node).find(".paper-standardScore").text(paper.standardScore);
         var paperPercentage = paper.userScore / paper.standardScore * 100;
-        $(node).find(".paper-percentage").text(Sugar.Number.format(Sugar.Number.round(paperPercentage, 2), 2) + "%");
+        $(node).find(".paper-percentage").text(paperPercentage.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + "%");
         $(node).find(".paper-score-progress").width(paperPercentage.toString() + "%");
         $(node).find(".paper-viewStudentAnswer").on("click", async e => {
             var studentAnserInfo = await zhixue.getStudentAnswerUrl(await TokenManager.getToken(), await TokenManager.getChildId(), paper.id, examId);
@@ -31,15 +30,14 @@ $(async () => {
         $(node).find(".paper-viewQuestionAnalysis").attr("href", "paper_analysis.html?paperId=" + paper.id);
         $("#list-paper").append(node);
     }
-
-    var examUserScore = Sugar.Array.sum(info.result.paperList, x => x.userScore);
-    var examStandardScore = Sugar.Array.sum(info.result.paperList, x => x.standardScore);
+    var examUserScore = info.result.paperList.reduce((r, x) => r + x.userScore, 0);
+    var examStandardScore = info.result.paperList.reduce((r, x) => r + x.standardScore, 0);
     var examPercentage = examUserScore / examStandardScore * 100;
     if (info.result.paperList.length > 1) {
         $("#conclusion").removeClass("d-none");
         $("#exam-userScore").text(examUserScore);
         $("#exam-standardScore").text(examStandardScore);
-        $("#exam-percentage").text(Sugar.Number.format(Sugar.Number.round(examPercentage, 2), 2) + "%");
+        $("#exam-percentage").text(examPercentage.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + "%");
         $("#exam-score-progress").width(examPercentage.toString() + "%");
 
         var chartLabels = info.result.paperList.map(x => x.subjectName);
@@ -79,7 +77,7 @@ $(async () => {
                     tooltip: {
                         displayColors: false,
                         callbacks: {
-                            label: x => Sugar.Number.format(Sugar.Number.round(chartDataValue[x.dataIndex], 2), 2) + "%",
+                            label: x => chartDataValue[x.dataIndex].toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + "%",
                             title: () => null,
                         }
                     }
@@ -136,7 +134,7 @@ $(async () => {
                         displayColors: false,
                         callbacks: {
                             label: (x) => info.result.paperList[x.dataIndex].userScore
-                                + " (" + Sugar.Number.format(Sugar.Number.round(chartDataValue[x.dataIndex], 2), 2) + "%)",
+                                + " (" + chartDataValue[x.dataIndex].toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + "%)",
                         }
                     },
                     datalabels: {
