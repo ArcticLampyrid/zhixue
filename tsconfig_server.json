@@ -3,7 +3,7 @@
         "target": "es2022",
         "module": "commonjs",
         "moduleResolution": "node",
-        "sourceMap": false,
+        "sourceMap": true,
         "outDir": "./dist/server",
         "types": [
             "node"

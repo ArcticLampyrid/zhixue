@@ -2,34 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
+            "name": "Debug Main Process",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}\\dist\\server\\main.js",
+            "program": "${workspaceRoot}/dist/server/main.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Build",
-            "runtimeExecutable": "${workspaceRoot}\\node_modules\\.bin\\electron.cmd",
-            "runtimeArgs": [
-                "--no-lazy"
-            ],
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+            },
             "env": {},
             "console": "internalConsole",
             "sourceMaps": true,
             "outFiles": []
         },
         {
-            "name": "Attach",
-            "type": "node",
-            "request": "attach",
-            "port": 5858,
-            "address": "localhost",
-            "restart": false,
-            "sourceMaps": true,
-            "localRoot": "${workspaceRoot}",
-            "remoteRoot": null,
-            "outFiles": []
+            "name": "Debug Renderer Process",
+            "type": "chrome",
+            "request": "launch",
+            "preLaunchTask": "Build",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+            },
+            "runtimeArgs": [
+                "${workspaceRoot}/dist/server/main.js",
+                "--remote-debugging-port=9222"
+            ],
+            "webRoot": "${workspaceRoot}"
         }
     ]
 }
