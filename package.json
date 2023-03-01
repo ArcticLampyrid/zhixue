@@ -44,17 +44,10 @@
         "zhixue"
     ],
     "dependencies": {
-        "@popperjs/core": "^2.11.6",
-        "bootstrap": "^5.3.0-alpha1",
-        "chart.js": "^4.2.0",
-        "chartjs-plugin-datalabels": "^2.2.0",
         "custom-electron-titlebar": "^4.1.6",
         "electron-updater": "^5.3.0",
         "https-proxy-agent": "^5.0.1",
-        "jquery": "^3.6.3",
-        "katex": "^0.16.4",
         "node-fetch": "^2.6.9",
-        "sugar": "^2.0.6",
         "uuid": "^9.0.0"
     },
     "devDependencies": {
@@ -64,6 +57,13 @@
         "@types/node": "^18.11.19",
         "@types/node-fetch": "^2.6.2",
         "@types/uuid": "^9.0.0",
+        "jquery": "^3.6.3",
+        "katex": "^0.16.4",
+        "@popperjs/core": "^2.11.6",
+        "bootstrap": "^5.3.0-alpha1",
+        "chart.js": "^4.2.0",
+        "chartjs-plugin-datalabels": "^2.2.0",
+        "sugar": "^2.0.6",
         "autoprefixer": "^10.4.13",
         "css-loader": "^6.7.3",
         "electron": "^22.2.0",
