@@ -1,6 +1,6 @@
 {
     "name": "zhixue",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "main": "./dist/server/main.js",
     "scripts": {
         "build": "webpack build && tsc -p ./tsconfig_server.json",
