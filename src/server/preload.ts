@@ -1,4 +1,4 @@
-import { Titlebar, Color } from 'custom-electron-titlebar'
+import { Titlebar, TitlebarColor } from 'custom-electron-titlebar'
 import { zhixue } from './zhixue'
 import { contextBridge, ipcRenderer } from 'electron';
 contextBridge.exposeInMainWorld('openDevTools', (params: any) => {
@@ -10,10 +10,9 @@ if (process.isMainFrame) {
         if (document.readyState == "interactive") {
             const getTitleBarBgColorHex = () => {
                 const bgColorHex = getComputedStyle(document.documentElement).getPropertyValue("--zx-bar-bg-color").trim();
-                return Color.fromHex(bgColorHex);
+                return TitlebarColor.fromHex(bgColorHex);
             }
             const titleBar = new Titlebar({
-                menu: null,
                 titleHorizontalAlignment: "left",
                 backgroundColor: getTitleBarBgColorHex()
             });

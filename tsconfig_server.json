@@ -5,12 +5,10 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "./dist/server",
+        "declaration": true,
         "types": [
             "node"
-        ],
-        // FIXME
-        // https://github.com/AlexTorresDev/custom-electron-titlebar/issues/198
-        "skipLibCheck": true
+        ]
     },
     "include": [
         "./src/server/*"

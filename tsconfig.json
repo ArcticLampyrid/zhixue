@@ -8,10 +8,7 @@
         "outDir": "./fake_dist",
         "types": [
             "node"
-        ],
-        // FIXME
-        // https://github.com/AlexTorresDev/custom-electron-titlebar/issues/198
-        "skipLibCheck": true
+        ]
     },
     "include": [
         "./src/**/*"

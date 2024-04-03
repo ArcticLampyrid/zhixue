@@ -1,10 +1,11 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, Menu } from "electron";
 import * as path from "path";
 import { autoUpdater } from 'electron-updater';
 import { setupTitlebar, attachTitlebarToWindow } from "custom-electron-titlebar/main";
 
 let mainWindow: Electron.BrowserWindow;
 
+Menu.setApplicationMenu(null);
 setupTitlebar();
 ipcMain.on('open-dev-tools', (event, options) => {
     const webContents = event.sender
